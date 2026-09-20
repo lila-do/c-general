@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Safe Internet & AI Use — Digital Guide for Teenagers</title>
+<style>
+:root{
+  --navy:#0b2538;--blue:#155a73;--teal:#147d7e;--cyan:#dff5f4;--orange:#f19a45;
+  --red:#b7464b;--purple:#6251a3;--ink:#1c3440;--muted:#5e7480;--line:#cbdde2;
+  --soft:#f6fbfc;--white:#fff;--green:#2f7b61;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;color:var(--ink);background:#f3f9fa;line-height:1.62}
+a{color:#096f86}
+.wrap{max-width:1160px;margin:auto;padding:0 18px}
+.hero{
+ min-height:560px;color:#fff;display:flex;align-items:flex-end;position:relative;overflow:hidden;
+ background:
+ linear-gradient(180deg,rgba(5,28,41,.18),rgba(5,28,41,.92)),
+ url('https://images.unsplash.com/photo-1764720572656-e605ed35c28d?auto=format&fit=crop&w=1800&q=80') center/cover;
+}
+.hero-inner{padding:72px 18px 38px;width:100%}
+.eyebrow{text-transform:uppercase;letter-spacing:.14em;font-size:.78rem;font-weight:900;color:#b9f1ef}
+h1{font-size:clamp(2.5rem,7vw,5.5rem);line-height:.96;margin:.45rem 0 1rem;max-width:900px}
+.hero p{font-size:1.14rem;max-width:850px;margin:0 0 18px;color:#e8f5f7}
+.hero-credit{font-size:.72rem;color:#d6e8ec;margin-top:12px}
+.quick{display:flex;flex-wrap:wrap;gap:8px}
+.quick a{color:#fff;text-decoration:none;border:1px solid #ffffff66;background:#ffffff12;padding:9px 13px;border-radius:999px;font-weight:800;backdrop-filter:blur(5px)}
+.quick a:hover,.quick a:focus{background:#ffffff28;outline:2px solid #fff;outline-offset:2px}
+nav{position:sticky;top:0;z-index:20;background:#ffffffef;border-bottom:1px solid var(--line);backdrop-filter:blur(8px)}
+nav .wrap{display:flex;gap:5px;overflow:auto;padding-top:8px;padding-bottom:8px}
+nav a{white-space:nowrap;text-decoration:none;color:var(--navy);font-weight:800;padding:8px 10px;border-radius:999px}
+nav a:hover{background:var(--cyan)}
+nav .ai{background:var(--purple);color:#fff}
+main{padding:18px 0 50px}
+.section{scroll-margin-top:78px;background:#fff;border:1px solid var(--line);border-radius:20px;padding:23px;margin:18px 0;box-shadow:0 8px 28px #0b253810}
+.kicker{text-transform:uppercase;font-size:.77rem;letter-spacing:.1em;font-weight:900;color:var(--teal)}
+h2{font-size:1.9rem;color:var(--navy);margin:.2rem 0 .55rem}
+h3{color:var(--blue);margin:1rem 0 .4rem}
+.grid{display:grid;gap:14px}.two{grid-template-columns:repeat(2,minmax(0,1fr))}.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.card{border:1px solid var(--line);border-radius:15px;padding:15px;background:var(--soft)}
+.card strong,.card b{color:var(--navy)}
+.small{font-size:.91rem;color:var(--muted)}
+.tag{display:inline-block;border-radius:999px;background:var(--cyan);color:#09666a;font-size:.75rem;font-weight:900;padding:4px 8px;margin-bottom:7px}
+.photo{margin:15px 0;border-radius:18px;overflow:hidden;border:1px solid var(--line);background:#dbe8ec}
+.photo img{display:block;width:100%;height:auto;max-height:550px;object-fit:cover}
+.caption{font-size:.74rem;color:var(--muted);background:#fff;padding:7px 10px}
+.media{padding:0;overflow:hidden}.media img{width:100%;height:260px;object-fit:cover;display:block}.media .content{padding:15px}
+.callout{border-left:5px solid var(--orange);background:#fff7e9;border-radius:12px;padding:14px 15px;margin:14px 0}
+.alert{border-left:5px solid var(--red);background:#fff1f1;border-radius:12px;padding:14px 15px;margin:14px 0}
+.good{border-left:5px solid var(--green);background:#edf8f3;border-radius:12px;padding:14px 15px;margin:14px 0}
+.rule{border-top:4px solid var(--teal)}.ai-card{border-top:4px solid var(--purple)}
+.education{border-left:5px solid var(--blue)}.social{border-left:5px solid var(--purple)}.money{border-left:5px solid var(--orange)}.news{border-left:5px solid var(--red)}
+.protocol{counter-reset:steps}.protocol .step{counter-increment:steps;position:relative;padding:14px 14px 14px 58px;border:1px solid var(--line);border-radius:14px;background:#fbfeff;margin:9px 0}
+.protocol .step:before{content:counter(steps);position:absolute;left:14px;top:12px;width:30px;height:30px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900}
+table{width:100%;border-collapse:collapse;margin-top:10px}
+th,td{padding:10px;border-bottom:1px solid var(--line);vertical-align:top;text-align:left}
+th{background:var(--cyan);color:var(--navy)}
+details{border:1px solid var(--line);border-radius:13px;margin:8px 0;background:#fbfeff}
+summary{cursor:pointer;padding:12px;font-weight:900;color:var(--navy)}
+details>div{padding:0 12px 12px}
+.phrase{border:1px solid var(--line);border-radius:10px;background:#fff;padding:9px;margin:6px 0}
+.repo{background:#f9fcfd}
+.check{list-style:none;padding:0}.check li{margin:8px 0;padding-left:28px;position:relative}.check li:before{content:"✓";position:absolute;left:0;color:var(--green);font-weight:900}
+.cross{list-style:none;padding:0}.cross li{margin:8px 0;padding-left:28px;position:relative}.cross li:before{content:"×";position:absolute;left:3px;color:var(--red);font-weight:900;font-size:1.2rem}
+.source-list li{margin:7px 0}
+footer{background:var(--navy);color:#fff;text-align:center;padding:30px 15px}.sig{color:#baf5f2;font-weight:900}
+.back{position:fixed;right:14px;bottom:14px;background:var(--orange);color:#1b2730;text-decoration:none;font-weight:900;border-radius:999px;padding:9px 12px;box-shadow:0 6px 18px #0002}
+@media(max-width:840px){.two,.three{grid-template-columns:1fr}.hero{min-height:520px}.media img{height:240px}}
+@media print{nav,.back{display:none}.section{box-shadow:none}.hero{min-height:360px}}
+</style>
+</head>
+
+<body id="top">
+
+<header class="hero">
+ <div class="hero-inner wrap">
+  <div class="eyebrow">Vocational High School • Advanced English • Digital Literacy</div>
+  <h1>SAFE INTERNET<br>&amp; AI USE</h1>
+  <p>A practical guide for teenagers who learn, socialise, spend money and follow the news online — in a world where artificial intelligence can be useful, persuasive, inaccurate and difficult to detect.</p>
+  <div class="quick">
+   <a href="#principles">🛡 Core Principles</a>
+   <a href="#ai">🤖 AI Literacy</a>
+   <a href="#education">🎓 Education</a>
+   <a href="#social">💬 Social Life</a>
+   <a href="#economy">💳 Economy</a>
+   <a href="#news">📰 News</a>
+   <a href="#vocabulary">📚 Vocabulary</a>
+  </div>
+  <div class="hero-credit">Photo: Fajar Herlambang STUDIO / Unsplash</div>
+ </div>
+</header>
+
+<nav>
+ <div class="wrap">
+  <a href="#principles">Safety</a><a class="ai" href="#ai">AI</a><a href="#education">Education</a>
+  <a href="#social">Social Life</a><a href="#economy">Economy</a><a href="#news">News</a>
+  <a href="#response">If Something Goes Wrong</a><a href="#practice">Scenarios</a><a href="#vocabulary">Vocabulary</a>
+ </div>
+</nav>
+
+<main class="wrap">
+
+<section class="section">
+ <div class="kicker">A guide for older teenagers</div>
+ <h2>Being “digital” is not the same as being digitally safe</h2>
+ <p>Most teenagers are confident users of phones, platforms and apps. Confidence, however, is not the same as security, privacy, critical judgement or media literacy. AI adds a new layer: content can now be produced at enormous speed, conversations can feel convincingly human, and images, voices and documents can be fabricated with increasing realism.</p>
+ <div class="callout"><b>The aim is not to fear technology.</b> The aim is to use it deliberately: protect your accounts and data, recognise manipulation, verify important claims and keep human judgement in control.</div>
+</section>
+
+<section id="principles" class="section">
+ <div class="kicker">01 • The digital safety foundation</div>
+ <h2>Seven principles of safe online behaviour</h2>
+ <div class="grid two">
+  <div class="card rule"><span class="tag">1 • Security</span><br><strong>Protect access to your accounts.</strong><p>Use passkeys where available, or strong unique passwords with two-step verification. Keep devices and apps updated.</p></div>
+  <div class="card rule"><span class="tag">2 • Privacy</span><br><strong>Share less than you think you need to.</strong><p>Personal details, locations, school information, documents and private photos can be copied, combined or used for impersonation.</p></div>
+  <div class="card rule"><span class="tag">3 • Consent</span><br><strong>Other people’s data is not yours to upload.</strong><p>Ask before posting, forwarding or submitting someone else’s photo, voice, message or work to an AI system.</p></div>
+  <div class="card rule"><span class="tag">4 • Verification</span><br><strong>Fluent does not mean factual.</strong><p>Check important information against reliable, independent sources — especially when an AI system supplies facts, quotations, citations or statistics.</p></div>
+  <div class="card rule"><span class="tag">5 • Reputation</span><br><strong>Your digital footprint has an audience you cannot fully predict.</strong><p>Assume that screenshots and copies may survive after a post is deleted.</p></div>
+  <div class="card rule"><span class="tag">6 • Financial caution</span><br><strong>Urgency is a warning sign.</strong><p>Slow down when a message pressures you to pay, invest, transfer money, reveal a code or “act now”.</p></div>
+  <div class="card rule"><span class="tag">7 • Human control</span><br><strong>Use AI as a tool, not an authority.</strong><p>You remain responsible for decisions, submissions, messages and consequences — even when AI suggested them.</p></div>
+  <div class="card rule"><span class="tag">Golden rule</span><br><strong>Pause before you click, post, pay or prompt.</strong><p>A ten-second pause can prevent a permanent mistake.</p></div>
+ </div>
+
+ <div class="good"><b>Strong account hygiene:</b> unique passwords or passkeys, two-step verification, automatic updates, screen lock, backups, and immediate action when an account behaves strangely.</div>
+</section>
+
+<section id="ai" class="section">
+ <div class="kicker">02 • Artificial intelligence changes the risk landscape</div>
+ <h2>AI literacy: useful, powerful — not automatically trustworthy</h2>
+ <p>Generative AI can create text, images, audio, video and code. It can support learning and creativity, but it may also invent information, reproduce bias, expose data, automate scams or make manipulation more convincing.</p>
+
+ <div class="grid three">
+  <div class="card ai-card"><b>Hallucination</b><p>An AI system may produce a confident answer that is inaccurate or entirely fabricated.</p></div>
+  <div class="card ai-card"><b>Synthetic media</b><p>Images, audio and video may be AI-generated or altered. Realistic appearance is no longer proof of authenticity.</p></div>
+  <div class="card ai-card"><b>Data exposure</b><p>Prompts may contain personal, confidential or copyrighted material. Treat anything you upload as information you may lose control over.</p></div>
+  <div class="card ai-card"><b>Bias</b><p>AI systems can reflect patterns, stereotypes and gaps found in training data and system design.</p></div>
+  <div class="card ai-card"><b>Persuasive fluency</b><p>AI can sound authoritative even when evidence is weak. Style is not a substitute for truth.</p></div>
+  <div class="card ai-card"><b>Automation at scale</b><p>AI can help criminals generate personalised phishing, fake reviews, cloned voices and convincing impersonation.</p></div>
+ </div>
+
+ <div class="alert"><b>Never paste into a general AI chatbot:</b> passwords, authentication codes, bank details, identity documents, private school records, intimate images, confidential workplace information, or another person’s private data without permission.</div>
+
+ <h3>Think Before You Trust: the S.E.E.D. check</h3>
+ <div class="grid two">
+  <div class="card"><b>S — Source</b><br>Who is behind the claim? Is there an identifiable original source?</div>
+  <div class="card"><b>E — Evidence</b><br>What evidence supports it? Can you find independent confirmation?</div>
+  <div class="card"><b>E — Environment</b><br>What is the date, context, platform and purpose? Could an algorithm be amplifying it?</div>
+  <div class="card"><b>D — Digital manipulation</b><br>Could the image, voice, quotation or document have been generated or altered?</div>
+ </div>
+</section>
+
+<section id="education" class="section">
+ <div class="kicker">03 • Education</div>
+ <h2>Use AI to strengthen learning — not replace it</h2>
+
+ <div class="photo">
+  <img src="https://images.unsplash.com/photo-1772971919691-598c37fe4b81?auto=format&fit=crop&w=1700&q=80" alt="Student working on a laptop in a classroom">
+  <div class="caption">Learning with digital tools. Photo: Mikhail Seleznev / Unsplash.</div>
+ </div>
+
+ <div class="grid two">
+  <div class="card education">
+   <h3>Productive uses</h3>
+   <ul class="check">
+    <li>Ask for an explanation at a different difficulty level.</li>
+    <li>Generate practice questions or vocabulary exercises.</li>
+    <li>Brainstorm possible approaches before writing.</li>
+    <li>Request feedback on clarity, organisation or grammar.</li>
+    <li>Compare several viewpoints and then verify them.</li>
+    <li>Use AI for role-play, interview practice or technical-English simulations.</li>
+   </ul>
+  </div>
+  <div class="card education">
+   <h3>Risky or dishonest uses</h3>
+   <ul class="cross">
+    <li>Submitting AI-generated work as if you wrote it yourself.</li>
+    <li>Copying citations without opening and checking the source.</li>
+    <li>Uploading confidential school material or classmates’ work.</li>
+    <li>Letting AI make a judgement you are expected to make.</li>
+    <li>Using AI output when your teacher or assessment rules prohibit it.</li>
+    <li>Assuming an “AI detector” can prove authorship with certainty.</li>
+   </ul>
+  </div>
+ </div>
+
+ <div class="callout"><b>A good academic habit:</b> keep a simple AI-use record: tool used, purpose, important prompts, what you accepted or rejected, and which claims you independently verified. Follow your school’s disclosure rules.</div>
+ <p>UNESCO’s guidance on generative AI in education emphasises a human-centred approach, data privacy, age-appropriate use and meaningful human agency rather than replacing learners’ judgement.</p>
+</section>
+
+<section id="social" class="section">
+ <div class="kicker">04 • Social life</div>
+ <h2>Friends, followers, chatbots and digital identity</h2>
+
+ <div class="photo">
+  <img src="https://images.unsplash.com/photo-1753351056802-24fd2345dc2b?auto=format&fit=crop&w=1700&q=80" alt="Friends sharing a smartphone">
+  <div class="caption">Phones are social spaces as well as personal devices. Photo: Vitaly Gariev / Unsplash.</div>
+ </div>
+
+ <div class="grid two">
+  <div class="card social"><b>Privacy is social.</b><p>A group photo, voice note or screenshot can reveal information about several people. Consent matters even when you are “only” sharing with friends.</p></div>
+  <div class="card social"><b>Private accounts are not private rooms.</b><p>Followers can screenshot, record or forward content. Use privacy settings, but do not treat them as a guarantee.</p></div>
+  <div class="card social"><b>AI companions are systems, not confidential friends.</b><p>Do not assume a chatbot relationship is private, neutral or emotionally equivalent to a human relationship.</p></div>
+  <div class="card social"><b>Deepfakes can harm real people.</b><p>Creating or sharing deceptive or non-consensual synthetic images of someone can cause severe harm and may have legal consequences.</p></div>
+  <div class="card social"><b>Cyberbullying travels.</b><p>Humiliation can be multiplied by reposts, group chats and recommendation systems. Do not join pile-ons because “everyone else is doing it”.</p></div>
+  <div class="card social"><b>Unknown contact deserves caution.</b><p>Grooming, impersonation and manipulation often begin with apparently friendly conversation and gradual requests for secrecy or private material.</p></div>
+ </div>
+
+ <div class="alert"><b>If someone pressures you for intimate images, money, secrecy or continued contact:</b> stop responding, save evidence, block/report the account and speak to a trusted adult or appropriate authority. Do not pay an extortion demand in the hope that the problem will disappear.</div>
+</section>
+
+<section id="economy" class="section">
+ <div class="kicker">05 • Economy & money</div>
+ <h2>AI-era scams, shopping and financial decisions</h2>
+
+ <div class="photo">
+  <img src="https://images.unsplash.com/photo-1758612215034-02c23a576afc?auto=format&fit=crop&w=1700&q=80" alt="Teenager shopping online with smartphone and payment card">
+  <div class="caption">Online shopping can combine convenience with financial risk. Photo: Vitaly Gariev / Unsplash.</div>
+ </div>
+
+ <div class="grid two">
+  <div class="card money"><b>Voice-clone emergency scams</b><p>A caller may sound like a relative or friend. Do not trust the voice alone. End the call and verify using a number or channel you already know.</p></div>
+  <div class="card money"><b>Phishing gets more convincing</b><p>AI can produce polished emails and messages. Check the sender, destination URL and request — not just spelling and grammar.</p></div>
+  <div class="card money"><b>Fake endorsements</b><p>A video of a celebrity or influencer apparently promoting an investment or product may be synthetic or manipulated.</p></div>
+  <div class="card money"><b>“Free” may still cost you</b><p>Trials, subscriptions, in-app purchases and data collection can create costs that are not obvious at the start.</p></div>
+  <div class="card money"><b>Investment hype</b><p>Claims of guaranteed returns, secret algorithms or urgent cryptocurrency opportunities are major warning signs.</p></div>
+  <div class="card money"><b>Payment methods matter</b><p>Requests for gift cards, cryptocurrency or unusual transfers are common scam indicators because money can be difficult to recover.</p></div>
+ </div>
+
+ <div class="good"><b>Money safety routine:</b> pause → verify independently → ask someone you trust → check the merchant or organisation directly → pay only through a legitimate channel → keep transaction records and alerts enabled.</div>
+ <p>The U.S. Federal Trade Commission warns that scammers can use short online audio clips to clone a person’s voice for fake family-emergency schemes. Its advice is to verify the story through a known contact method rather than trusting the voice.</p>
+</section>
+
+<section id="news" class="section">
+ <div class="kicker">06 • News & information</div>
+ <h2>When seeing is no longer believing</h2>
+
+ <div class="grid two">
+  <div class="card media">
+   <img src="https://images.unsplash.com/photo-1709285672636-181f824f52bd?auto=format&fit=crop&w=1500&q=80" alt="Fake news concept">
+   <div class="content"><h3>Disinformation can be produced at scale</h3><p>AI lowers the cost of producing convincing text, images and audio. A false story can look professionally written and visually credible.</p><div class="small">Photo: Insaanu Studio / Unsplash.</div></div>
+  </div>
+  <div class="card media">
+   <img src="https://images.unsplash.com/photo-1590345213370-caf4f5515bc6?auto=format&fit=crop&w=1500&q=80" alt="News application on a smartphone">
+   <div class="content"><h3>Your feed is selected, not neutral</h3><p>Recommendation systems prioritise content according to signals and platform objectives. Popularity and repetition are not evidence of accuracy.</p><div class="small">Photo: Rich Smith / Unsplash.</div></div>
+  </div>
+ </div>
+
+ <h3>The 5-question verification routine</h3>
+ <div class="protocol">
+  <div class="step"><b>Who published it?</b><br>Find the original publisher, author or organisation — not just the account that reposted it.</div>
+  <div class="step"><b>What is the evidence?</b><br>Look for documents, direct quotations, data, named witnesses or traceable sources.</div>
+  <div class="step"><b>What do independent sources say?</b><br>Check whether reliable outlets or primary sources confirm the claim.</div>
+  <div class="step"><b>Is the context complete?</b><br>An old image, cropped video or true statement placed in a false context can mislead.</div>
+  <div class="step"><b>Could it be synthetic?</b><br>Look for provenance and original uploads. Do not rely on a single “AI detector” as definitive proof.</div>
+ </div>
+
+ <div class="callout"><b>Three useful distinctions:</b> <b>misinformation</b> is false or inaccurate information shared without necessarily intending harm; <b>disinformation</b> is deliberately deceptive; <b>malinformation</b> uses genuine information in a harmful or manipulative way, often by stripping it of context or violating privacy.</div>
+</section>
+
+<section id="response" class="section">
+ <div class="kicker">07 • Response plan</div>
+ <h2>If something goes wrong online</h2>
+ <div class="protocol">
+  <div class="step"><b>Do not panic or rush.</b><br>Urgency benefits scammers and manipulators.</div>
+  <div class="step"><b>Stop the interaction.</b><br>Do not keep arguing, paying or sending more information.</div>
+  <div class="step"><b>Preserve evidence.</b><br>Save relevant screenshots, usernames, URLs, dates and transaction details where appropriate.</div>
+  <div class="step"><b>Secure the account.</b><br>Change compromised credentials, end unknown sessions and enable stronger authentication.</div>
+  <div class="step"><b>Block and report.</b><br>Use the platform’s reporting tools for impersonation, harassment, harmful content or fraud.</div>
+  <div class="step"><b>Tell a trusted person.</b><br>For teenagers, involving a trusted adult, teacher or safeguarding professional can prevent escalation.</div>
+  <div class="step"><b>Escalate serious cases.</b><br>Threats, extortion, financial theft, stalking or sexual exploitation may require the platform, bank, school safeguarding team, helpline or police.</div>
+ </div>
+</section>
+
+<section id="practice" class="section">
+ <div class="kicker">08 • Classroom challenge</div>
+ <h2>What would you do?</h2>
+
+ <details><summary>Scenario 1 — AI homework shortcut</summary><div>
+  <p>You ask an AI chatbot to write your assignment. It produces a polished answer with three references.</p>
+  <p><b>Your task:</b> Identify at least four things you must do before using any part of the response.</p>
+  <p><b>Suggested answer:</b> Check school rules; verify the references exist; read the sources yourself; rewrite from your own understanding; disclose AI assistance if required; remove personal/confidential data from prompts.</p>
+ </div></details>
+
+ <details><summary>Scenario 2 — “It sounds exactly like my brother”</summary><div>
+  <p>You receive a call from someone who sounds like your brother. He says his phone is damaged and urgently needs money transferred to a new account.</p>
+  <p><b>Best response:</b> End the call and contact your brother through a known number or another trusted person. Do not trust voice identity alone.</p>
+ </div></details>
+
+ <details><summary>Scenario 3 — Viral breaking-news video</summary><div>
+  <p>A dramatic video is being shared by many accounts, but none links to the original source.</p>
+  <p><b>Best response:</b> Pause sharing; find the earliest/original upload; check credible independent reporting; verify date and location; consider synthetic or edited media.</p>
+ </div></details>
+
+ <details><summary>Scenario 4 — AI “friend” asks personal questions</summary><div>
+  <p>A chatbot conversation becomes very personal and asks about your location, family problems and private photos.</p>
+  <p><b>Best response:</b> Do not treat the chatbot as confidential. Avoid sharing sensitive information; review the service’s privacy settings and stop the conversation if it becomes uncomfortable or inappropriate.</p>
+ </div></details>
+
+ <details><summary>Scenario 5 — A friend becomes a meme</summary><div>
+  <p>Someone uses AI to alter a classmate’s photo and posts it as a joke. Other students start reposting it.</p>
+  <p><b>Best response:</b> Do not amplify it. Consider consent, humiliation and potential harm; support the person targeted and use appropriate reporting/safeguarding channels.</p>
+ </div></details>
+</section>
+
+<section id="vocabulary" class="section repo">
+ <div class="kicker">09 • Advanced English repository</div>
+ <h2>Digital safety & AI vocabulary</h2>
+ <table>
+  <tr><th>Term</th><th>Greek</th><th>Meaning</th><th>Example in context</th></tr>
+  <tr><td>algorithm</td><td>αλγόριθμος</td><td>A set of rules used by a computer system to process information or make selections.</td><td>A recommendation algorithm decides which posts appear in your feed.</td></tr>
+  <tr><td>authentication</td><td>επαλήθευση ταυτότητας / αυθεντικοποίηση</td><td>The process of proving that a user is who they claim to be.</td><td>Two-step authentication adds another layer of account security.</td></tr>
+  <tr><td>bias</td><td>μεροληψία</td><td>A systematic tendency that may produce unfair or distorted outcomes.</td><td>AI output can reflect bias present in data or system design.</td></tr>
+  <tr><td>bot</td><td>αυτοματοποιημένο πρόγραμμα / bot</td><td>An automated software agent that performs tasks or interacts with users.</td><td>Some accounts spreading a story may be automated bots.</td></tr>
+  <tr><td>clickbait</td><td>παραπλανητικός τίτλος για προσέλκυση κλικ</td><td>Sensational content designed mainly to attract clicks.</td><td>The headline was clickbait and exaggerated the actual story.</td></tr>
+  <tr><td>consent</td><td>συναίνεση</td><td>Clear permission freely given for a particular action.</td><td>Ask for consent before uploading somebody’s image to an AI tool.</td></tr>
+  <tr><td>cyberbullying</td><td>διαδικτυακός εκφοβισμός</td><td>Repeated harmful or humiliating behaviour using digital technologies.</td><td>Reposting an abusive meme can contribute to cyberbullying.</td></tr>
+  <tr><td>data breach</td><td>παραβίαση δεδομένων</td><td>An incident in which protected data is accessed or exposed without authorisation.</td><td>The company told users to change passwords after a data breach.</td></tr>
+  <tr><td>deepfake</td><td>συνθετικό / παραποιημένο ψηφιακό υλικό</td><td>Synthetic or manipulated media that convincingly imitates a real person or event.</td><td>The audio clip may be a deepfake rather than a genuine recording.</td></tr>
+  <tr><td>digital footprint</td><td>ψηφιακό αποτύπωμα</td><td>The lasting trail of information created by online activity.</td><td>Public posts become part of your digital footprint.</td></tr>
+  <tr><td>disinformation</td><td>σκόπιμη παραπληροφόρηση</td><td>False or misleading information intentionally created or spread to deceive.</td><td>The campaign used disinformation to manipulate readers.</td></tr>
+  <tr><td>encryption</td><td>κρυπτογράφηση</td><td>The transformation of data so that only authorised parties can read it.</td><td>Encrypted messaging can protect communications in transit.</td></tr>
+  <tr><td>hallucination</td><td>παραίσθηση / ανακριβής επινόηση από σύστημα ΤΝ</td><td>An AI-generated statement that sounds plausible but is unsupported or false.</td><td>The chatbot hallucinated a journal article that did not exist.</td></tr>
+  <tr><td>impersonation</td><td>πλαστοπροσωπία</td><td>Pretending to be another person or organisation.</td><td>The fake account was created for impersonation.</td></tr>
+  <tr><td>malinformation</td><td>κακόβουλη χρήση αληθινών πληροφοριών</td><td>Genuine information used in a harmful, misleading or privacy-violating context.</td><td>A private message was published without context as malinformation.</td></tr>
+  <tr><td>metadata</td><td>μεταδεδομένα</td><td>Data describing other data, such as time, location or device information.</td><td>A photo may contain metadata you did not intend to share.</td></tr>
+  <tr><td>misinformation</td><td>λανθασμένη πληροφορία / μη σκόπιμη παραπληροφόρηση</td><td>False or inaccurate information shared without necessarily intending deception.</td><td>Correcting misinformation requires checking the original source.</td></tr>
+  <tr><td>multi-factor authentication (MFA)</td><td>πολυπαραγοντικός έλεγχος ταυτότητας</td><td>Login security requiring more than one form of verification.</td><td>MFA can protect an account even if a password is stolen.</td></tr>
+  <tr><td>passkey</td><td>κλειδί πρόσβασης</td><td>A device-based cryptographic login method designed to resist phishing.</td><td>Use a passkey when a trusted service offers one.</td></tr>
+  <tr><td>personal data</td><td>προσωπικά δεδομένα</td><td>Information that identifies or relates to an identifiable person.</td><td>Your address and student ID are personal data.</td></tr>
+  <tr><td>phishing</td><td>ηλεκτρονικό «ψάρεμα» στοιχείων</td><td>Fraudulent communication designed to steal information or make you take a harmful action.</td><td>The message used a fake login page in a phishing attempt.</td></tr>
+  <tr><td>privacy by default</td><td>προστασία ιδιωτικότητας εξ ορισμού</td><td>A design approach in which the safest privacy settings apply automatically.</td><td>Teen accounts should benefit from strong privacy by default.</td></tr>
+  <tr><td>recommender system</td><td>σύστημα συστάσεων</td><td>A system that selects content, products or people for a user.</td><td>A recommender system may repeatedly show similar content.</td></tr>
+  <tr><td>social engineering</td><td>κοινωνική μηχανική</td><td>Manipulating people into revealing information or taking unsafe actions.</td><td>The scam relied on social engineering rather than technical hacking.</td></tr>
+  <tr><td>synthetic media</td><td>συνθετικά μέσα / συνθετικό ψηφιακό περιεχόμενο</td><td>Media created or substantially modified using generative technology.</td><td>The image was labelled as synthetic media.</td></tr>
+  <tr><td>two-step verification (2SV)</td><td>επαλήθευση σε δύο βήματα</td><td>A second identity check added to login.</td><td>Turn on 2SV for email, social media and payment accounts.</td></tr>
+  <tr><td>voice cloning</td><td>κλωνοποίηση φωνής</td><td>AI-generated speech designed to imitate a real person’s voice.</td><td>Voice cloning can make an emergency scam sound convincing.</td></tr>
+ </table>
+
+ <h3>Useful advanced phrases for discussion</h3>
+ <div class="grid two">
+  <div>
+   <div class="phrase"><b>“What evidence supports that claim?”</b></div>
+   <div class="phrase"><b>“Can we trace this back to the original source?”</b></div>
+   <div class="phrase"><b>“The content is plausible, but it has not been verified.”</b></div>
+   <div class="phrase"><b>“This may be authentic, manipulated or entirely synthetic.”</b></div>
+  </div>
+  <div>
+   <div class="phrase"><b>“I used AI for feedback, not to replace my own work.”</b></div>
+   <div class="phrase"><b>“I would not share that information without consent.”</b></div>
+   <div class="phrase"><b>“The message creates urgency, which is a common manipulation tactic.”</b></div>
+   <div class="phrase"><b>“A realistic presentation is not evidence of factual accuracy.”</b></div>
+  </div>
+ </div>
+</section>
+
+<section class="section">
+ <div class="kicker">Official guidance & further reading</div>
+ <h2>Reliable starting points</h2>
+ <ul class="source-list">
+  <li><a href="https://www.unesco.org/en/articles/guidance-generative-ai-education-and-research" target="_blank"><b>UNESCO — Guidance for Generative AI in Education and Research</b></a>: human-centred, privacy-aware and age-appropriate AI use.</li>
+  <li><a href="https://www.unicef.org/digitaleducation/safety" target="_blank"><b>UNICEF — Digital Education: Safety</b></a>: online learning opportunities and risks for children and young people.</li>
+  <li><a href="https://www.unicef.org/protection/keeping-children-safe-online" target="_blank"><b>UNICEF — Keeping Children Safe Online</b></a>: AI, exploitation, cyberbullying, harmful content and manipulative digital practices.</li>
+  <li><a href="https://digital-strategy.ec.europa.eu/en/library/commission-publishes-guidelines-protection-minors" target="_blank"><b>European Commission — DSA Guidelines on the Protection of Minors</b></a>: privacy, recommender systems, blocking/muting and safer platform design.</li>
+  <li><a href="https://consumer.ftc.gov/articles/scammers-use-fake-emergencies-steal-your-money" target="_blank"><b>FTC Consumer Advice — Fake Emergency Scams</b></a>: including AI voice-cloning risks.</li>
+  <li><a href="https://www.ncsc.gov.uk/collection/top-tips-for-staying-secure-online/password-managers" target="_blank"><b>UK National Cyber Security Centre — Password Managers & Secure Accounts</b></a>: unique credentials, password managers, passkeys and two-step verification.</li>
+ </ul>
+ <p class="small">Educational guide prepared for classroom use. Online services, AI systems and platform policies change quickly; students should check current school rules and official guidance when making important decisions.</p>
+</section>
+
+</main>
+
+<footer>
+ <div><b>Safe Internet & AI Use — Digital Guide for Teenagers</b></div>
+ <div class="sig">Evangelia Domvrou - Teacher of English Language and Literature</div>
+</footer>
+
+<a class="back" href="#top" aria-label="Back to top">↑</a>
+</body>
+</html>
