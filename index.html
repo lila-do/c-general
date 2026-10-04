@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>EMBRACE · Poetry × Technological Change</title>
+<style>
+:root{
+  --bg:#f4f2ea; --paper:#fffdf7; --ink:#17222a; --muted:#607079;
+  --accent:#eb5b2a; --teal:#0b6f78; --line:#d6d3c8; --ok:#137a53;
+  --shadow:0 10px 30px rgba(23,34,42,.10);
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;font-family:Georgia,"Times New Roman",serif;background:var(--bg);color:var(--ink)}
+body{overflow:hidden}
+button,input,textarea{font:inherit}
+button{touch-action:manipulation}
+.app{height:100vh;display:grid;grid-template-rows:auto 1fr auto}
+header{
+  display:flex;align-items:center;justify-content:space-between;gap:18px;
+  padding:14px 24px;border-bottom:1px solid var(--line);background:rgba(255,253,247,.96)
+}
+.brand{font-family:Arial,sans-serif;font-weight:900;letter-spacing:.08em;font-size:clamp(16px,1.8vw,25px)}
+.brand span{font-weight:500;letter-spacing:.02em;color:var(--muted)}
+.tools{display:flex;gap:9px;flex-wrap:wrap;justify-content:flex-end}
+.btn{
+  border:1.5px solid var(--ink);background:var(--paper);color:var(--ink);
+  border-radius:999px;padding:10px 16px;font-family:Arial,sans-serif;font-weight:750;
+  font-size:clamp(14px,1.3vw,18px);cursor:pointer
+}
+.btn:hover,.btn:focus-visible{background:var(--ink);color:white;outline:none}
+.btn.primary{background:var(--ink);color:white}
+main{min-height:0;position:relative}
+.screen{
+  display:none;height:100%;padding:clamp(18px,3vw,42px);overflow:auto;
+  align-content:center
+}
+.screen.active{display:grid}
+.panel{
+  width:min(1180px,100%);margin:auto;background:var(--paper);border:1px solid var(--line);
+  border-radius:28px;padding:clamp(24px,4vw,52px);box-shadow:var(--shadow)
+}
+.kicker{font-family:Arial,sans-serif;font-size:clamp(13px,1.2vw,17px);letter-spacing:.14em;font-weight:900;color:var(--accent);text-transform:uppercase}
+h1{font-size:clamp(36px,5.5vw,76px);line-height:.98;margin:10px 0 18px;max-width:900px}
+h2{font-size:clamp(28px,4vw,52px);line-height:1.03;margin:8px 0 16px}
+.lead{font-size:clamp(20px,2.2vw,31px);line-height:1.35;max-width:980px}
+.small{font-family:Arial,sans-serif;color:var(--muted);font-size:clamp(14px,1.3vw,18px)}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:24px}
+.choice{
+  min-height:112px;text-align:left;border:2px solid var(--line);border-radius:20px;background:white;
+  padding:20px;font-size:clamp(20px,2vw,28px);font-weight:700;cursor:pointer
+}
+.choice:hover,.choice:focus-visible{border-color:var(--teal);outline:none}
+.choice.selected{border-color:var(--teal);background:#e8f4f2}
+.choice.correct{border-color:var(--ok);background:#eaf7f0}
+.choice.wrong{border-color:#b63e31;background:#fff0ed}
+textarea,input[type="text"]{
+  width:100%;border:2px solid var(--line);border-radius:16px;padding:16px 18px;
+  background:white;color:var(--ink);font-size:clamp(18px,1.8vw,25px)
+}
+textarea{min-height:120px;resize:vertical}
+.row{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.pill{display:inline-block;padding:7px 12px;border-radius:999px;background:#e8f4f2;color:var(--teal);font-family:Arial,sans-serif;font-weight:800}
+.quote{
+  border-left:6px solid var(--accent);padding:16px 22px;margin:22px 0;background:#fff6ef;
+  font-size:clamp(23px,2.7vw,38px);line-height:1.25
+}
+.tf{display:grid;gap:12px;margin-top:20px}
+.tfrow{display:grid;grid-template-columns:1fr auto auto;gap:12px;align-items:center;border:1px solid var(--line);border-radius:16px;padding:14px}
+.tfrow button{min-width:70px}
+.feedback{min-height:28px;margin-top:15px;font-family:Arial,sans-serif;font-weight:800}
+.meter{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:22px}
+.meter button{min-height:88px}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0}
+.chip{border:2px solid var(--line);background:white;border-radius:999px;padding:12px 16px;font-size:clamp(17px,1.5vw,22px);cursor:pointer}
+.chip.selected{background:#e8f4f2;border-color:var(--teal)}
+.sortzone{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:20px}
+.bucket{border:2px dashed var(--line);border-radius:20px;padding:18px;min-height:150px}
+footer{
+  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;
+  padding:12px 20px;border-top:1px solid var(--line);background:rgba(255,253,247,.97)
+}
+.navright{justify-self:end}
+.progress{font-family:Arial,sans-serif;font-weight:900}
+.author{font-family:Arial,sans-serif;color:var(--muted);font-size:clamp(11px,1vw,14px);text-align:center}
+.modal{
+  position:fixed;inset:0;background:rgba(15,20,24,.72);display:none;place-items:center;padding:24px;z-index:20
+}
+.modal.open{display:grid}
+.modalbox{
+  width:min(980px,96vw);max-height:88vh;overflow:auto;background:var(--paper);border-radius:24px;
+  padding:28px;box-shadow:0 20px 70px rgba(0,0,0,.35)
+}
+.modalhead{display:flex;justify-content:space-between;gap:15px;align-items:center}
+.x{font-size:25px;min-width:48px;min-height:48px;border-radius:50%;border:1px solid var(--ink);background:white;cursor:pointer}
+.poembox{white-space:pre-wrap;font-size:clamp(20px,2vw,28px);line-height:1.45;background:white;border:1px solid var(--line);border-radius:18px;padding:22px}
+.notice{background:#fff6ef;border:1px solid #efc6ab;border-radius:16px;padding:16px;font-family:Arial,sans-serif}
+@media(max-width:760px){
+  header{padding:10px 12px;align-items:flex-start}
+  .tools{gap:5px}.btn{padding:8px 10px}
+  .grid,.sortzone{grid-template-columns:1fr}
+  .tfrow{grid-template-columns:1fr auto auto}
+  footer{grid-template-columns:auto 1fr auto}.author{display:none}
+}
+@media (prefers-reduced-motion:no-preference){
+  .panel{animation:in .22s ease-out}
+  @keyframes in{from{transform:translateY(8px);opacity:.75}to{transform:none;opacity:1}}
+}
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+  <div class="brand">EMBRACE <span>/ poetry × technological change</span></div>
+  <div class="tools">
+    <button class="btn" onclick="openPoem()">Full poem</button>
+    <button class="btn" onclick="openTextbook()">Textbook page</button>
+    <button class="btn" onclick="openSlides()">Slides</button>
+    <button class="btn" onclick="toggleFull()">Full screen</button>
+  </div>
+</header>
+
+<main>
+<section class="screen active" data-i="0"><div class="panel">
+  <div class="kicker">01 / Before reading</div>
+  <h1>What changed your world?</h1>
+  <p class="lead">Think about the past five years. Which part of your life changed most because of technology?</p>
+  <div class="grid" id="changeChoices">
+    <button class="choice" data-value="Work & skills">Work &amp; skills</button>
+    <button class="choice" data-value="Friendships">Friendships</button>
+    <button class="choice" data-value="Learning & AI">Learning &amp; AI</button>
+    <button class="choice" data-value="Entertainment">Entertainment</button>
+  </div>
+  <p class="lead" style="margin-top:22px">Give one concrete example.</p>
+  <textarea data-save="s1example" placeholder="Tap here and type a short example…"></textarea>
+  <p class="small">Classroom move: quick show of hands after each choice. There is no right answer yet.</p>
+</div></section>
+
+<section class="screen" data-i="1"><div class="panel">
+  <div class="kicker">02 / Prediction</div>
+  <h2>The title is <em>Embrace</em>.</h2>
+  <p class="lead">Before reading, what do you think the speaker wants us to do with technological change?</p>
+  <div class="meter" id="prediction">
+    <button class="choice">Reject it</button><button class="choice">Fear it</button><button class="choice">Question it</button><button class="choice">Accept it</button><button class="choice">Celebrate it</button>
+  </div>
+  <textarea data-save="s2why" placeholder="Why did you choose that position?"></textarea>
+</div></section>
+
+<section class="screen" data-i="2"><div class="panel">
+  <div class="kicker">03 / First reading</div>
+  <h2>Read for the big idea.</h2>
+  <p class="lead">Use the <strong>Full poem</strong> button. Read once without stopping. Then choose the statement that best captures the speaker’s position.</p>
+  <div class="grid quiz" data-answer="3">
+    <button class="choice">Technology should be stopped before it changes everyday life.</button>
+    <button class="choice">Technology changes only a few areas of life.</button>
+    <button class="choice">Change is temporary, so there is no need to react.</button>
+    <button class="choice">Technological change is already happening, so we should engage with it rather than hide from it.</button>
+  </div>
+  <div class="feedback"></div>
+</div></section>
+
+<section class="screen" data-i="3"><div class="panel">
+  <div class="kicker">04 / Image & metaphor</div>
+  <h2>What picture does the poem create?</h2>
+  <div class="quote">“spreading its wire like tentacles”</div>
+  <p class="lead">What does this image suggest about technology?</p>
+  <div class="grid quiz" data-answer="1">
+    <button class="choice">It is fragile and easy to ignore.</button>
+    <button class="choice">It reaches into many parts of life and is difficult to contain.</button>
+    <button class="choice">It is old-fashioned and disappearing.</button>
+    <button class="choice">It affects only people who work with computers.</button>
+  </div>
+  <div class="feedback"></div>
+</div></section>
+
+<section class="screen" data-i="4"><div class="panel">
+  <div class="kicker">05 / Evidence hunt</div>
+  <h2>True, false — and prove it.</h2>
+  <p class="lead">Decide T/F. Then use the poem to justify each answer aloud with a line or phrase.</p>
+  <div class="tf" id="tf">
+    <div class="tfrow" data-correct="T"><span>Technological change is presented as fast and difficult to reverse.</span><button class="btn">T</button><button class="btn">F</button></div>
+    <div class="tfrow" data-correct="F"><span>The speaker is unwilling to accept technological change.</span><button class="btn">T</button><button class="btn">F</button></div>
+    <div class="tfrow" data-correct="F"><span>Everyday life is largely unaffected by technology.</span><button class="btn">T</button><button class="btn">F</button></div>
+    <div class="tfrow" data-correct="T"><span>The reader is urged not to be left behind by change.</span><button class="btn">T</button><button class="btn">F</button></div>
+  </div>
+  <div class="feedback" id="tffb"></div>
+</div></section>
+
+<section class="screen" data-i="5"><div class="panel">
+  <div class="kicker">06 / Language</div>
+  <h2>Words that push the reader forward</h2>
+  <p class="lead">Tap the words that sound like <strong>commands or advice</strong>.</p>
+  <div class="chips" id="verbs">
+    <button class="chip" data-good="1">don’t deny</button><button class="chip" data-good="1">don’t prevent</button>
+    <button class="chip" data-good="0">changed</button><button class="chip" data-good="1">don’t fear</button>
+    <button class="chip" data-good="0">fascinates</button><button class="chip" data-good="1">embrace</button>
+  </div>
+  <div class="feedback" id="verbsfb"></div>
+</div></section>
+
+<section class="screen" data-i="6"><div class="panel">
+  <div class="kicker">07 / Vocabulary</div>
+  <h2>Three key ideas</h2>
+  <div class="grid">
+    <button class="choice vocab" data-def="A change from one form or state into another."><strong>transformation</strong></button>
+    <button class="choice vocab" data-def="Happening very quickly."><strong>rapid</strong></button>
+    <button class="choice vocab" data-def="Impossible, or very difficult, to change back."><strong>irreversible</strong></button>
+    <button class="choice vocab" data-def="To accept something willingly or enthusiastically."><strong>embrace</strong></button>
+  </div>
+  <div class="quote" id="vocabDef">Tap a word to reveal its meaning.</div>
+</div></section>
+
+<section class="screen" data-i="7"><div class="panel">
+  <div class="kicker">08 / Tone</div>
+  <h2>How does the speaker sound?</h2>
+  <p class="lead">Choose the strongest answer, then defend it.</p>
+  <div class="grid quiz" data-answer="1">
+    <button class="choice">Defeated and hopeless</button>
+    <button class="choice">Urgent and accepting</button>
+    <button class="choice">Detached and uninterested</button>
+    <button class="choice">Nostalgic and regretful</button>
+  </div>
+  <div class="feedback"></div>
+  <textarea data-save="s8evidence" placeholder="Which words or ideas create that tone?"></textarea>
+</div></section>
+
+<section class="screen" data-i="8"><div class="panel">
+  <div class="kicker">09 / Agree or challenge</div>
+  <h2>Should we always “embrace” new technology?</h2>
+  <p class="lead">Move from 1 to 5: 1 = strongly disagree, 5 = strongly agree.</p>
+  <div class="meter" id="stance">
+    <button class="choice">1</button><button class="choice">2</button><button class="choice">3</button><button class="choice">4</button><button class="choice">5</button>
+  </div>
+  <textarea data-save="s9reason" placeholder="Give one reason and one example."></textarea>
+</div></section>
+
+<section class="screen" data-i="9"><div class="panel">
+  <div class="kicker">10 / Two sides</div>
+  <h2>Opportunity or risk?</h2>
+  <p class="lead">Tap each idea to classify it. Use the class discussion to challenge any placement.</p>
+  <div class="chips" id="sortchips">
+    <button class="chip">faster access to information</button><button class="chip">privacy loss</button>
+    <button class="chip">new ways to learn</button><button class="chip">job disruption</button>
+    <button class="chip">creative tools</button><button class="chip">misinformation</button>
+  </div>
+  <div class="sortzone"><div class="bucket"><h3>Opportunity</h3><div id="opp"></div></div><div class="bucket"><h3>Risk</h3><div id="risk"></div></div></div>
+  <p class="small">Tap an item repeatedly to move it: unclassified → opportunity → risk → unclassified.</p>
+</div></section>
+
+<section class="screen" data-i="10"><div class="panel">
+  <div class="kicker">11 / Rewrite</div>
+  <h2>Change the speaker’s message.</h2>
+  <p class="lead">Write one line that answers the poem from a more cautious point of view. Start with one of these:</p>
+  <div class="chips"><span class="pill">Before we embrace it…</span><span class="pill">Change can help us, but…</span><span class="pill">We should not fear technology; however…</span></div>
+  <textarea data-save="s11line" placeholder="Write your line here…"></textarea>
+</div></section>
+
+<section class="screen" data-i="11"><div class="panel">
+  <div class="kicker">12 / Mini debate</div>
+  <h2>30 seconds per side</h2>
+  <div class="grid">
+    <div class="choice" style="cursor:default"><strong>Side A</strong><br><span class="small">The poem is right: resisting technological change leaves us behind.</span></div>
+    <div class="choice" style="cursor:default"><strong>Side B</strong><br><span class="small">The poem is too optimistic: some technologies should be slowed, limited, or refused.</span></div>
+  </div>
+  <p class="lead">Use: <strong>claim → example → because</strong>.</p>
+  <textarea data-save="s12notes" placeholder="Class notes / strongest argument…"></textarea>
+</div></section>
+
+<section class="screen" data-i="12"><div class="panel">
+  <div class="kicker">13 / Exit ticket</div>
+  <h2>Finish in one sentence.</h2>
+  <p class="lead">The poem’s message is powerful because… / limited because…</p>
+  <textarea data-save="s13exit" placeholder="Your final sentence…"></textarea>
+  <div class="row" style="margin-top:20px">
+    <button class="btn primary" onclick="showSummary()">Show class summary</button>
+    <button class="btn" onclick="resetActivity()">Reset activity</button>
+  </div>
+  <div id="summary" class="quote" style="display:none"></div>
+</div></section>
+</main>
+
+<footer>
+  <button class="btn" id="back" onclick="go(-1)">← Back</button>
+  <div><div class="progress"><span id="num">1</span> / 13</div><div class="author">Evangelia Domvrou, Teacher of English Language and Literature</div></div>
+  <button class="btn primary navright" id="next" onclick="go(1)">Next →</button>
+</footer>
+</div>
+
+<div class="modal" id="poemModal"><div class="modalbox">
+  <div class="modalhead"><h2>Full poem</h2><button class="x" onclick="closeModal('poemModal')">×</button></div>
+  <div class="notice">
+    For a fully offline classroom copy, paste the poem here once from your legally available textbook/material. It is saved only in this browser on this device.
+  </div>
+  <textarea id="poemInput" style="min-height:280px;margin-top:16px" placeholder="Paste the full poem here…"></textarea>
+  <div class="row" style="margin-top:12px"><button class="btn primary" onclick="savePoem()">Save locally</button><button class="btn" onclick="clearPoem()">Clear</button></div>
+  <div class="poembox" id="poemView" style="margin-top:18px"></div>
+</div></div>
+
+<div class="modal" id="slidesModal"><div class="modalbox">
+  <div class="modalhead"><h2>Lesson map · 13 screens</h2><button class="x" onclick="closeModal('slidesModal')">×</button></div>
+  <ol class="lead" style="font-size:clamp(18px,1.7vw,25px);line-height:1.6">
+    <li>Before reading: technology and your life</li><li>Predict from the title</li><li>First reading: big idea</li>
+    <li>Image and metaphor</li><li>True/false evidence hunt</li><li>Commands and advice</li>
+    <li>Vocabulary</li><li>Tone</li><li>Agree or challenge</li><li>Opportunity or risk</li>
+    <li>Rewrite the message</li><li>Mini debate</li><li>Exit ticket</li>
+  </ol>
+</div></div>
+
+<script>
+const screens=[...document.querySelectorAll('.screen')]; let idx=0;
+const KEY='embrace_activity_v1';
+let state={}; try{state=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){}
+function persist(){localStorage.setItem(KEY,JSON.stringify(state))}
+function render(){
+  screens.forEach((s,i)=>s.classList.toggle('active',i===idx));
+  document.getElementById('num').textContent=idx+1;
+  document.getElementById('back').disabled=idx===0;
+  document.getElementById('next').textContent=idx===screens.length-1?'Start again ↺':'Next →';
+}
+function go(d){ if(idx===screens.length-1 && d>0) idx=0; else idx=Math.max(0,Math.min(screens.length-1,idx+d)); render() }
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight' && !/INPUT|TEXTAREA/.test(document.activeElement.tagName))go(1);if(e.key==='ArrowLeft' && !/INPUT|TEXTAREA/.test(document.activeElement.tagName))go(-1)})
+document.querySelectorAll('[data-save]').forEach(el=>{const k=el.dataset.save;el.value=state[k]||'';el.addEventListener('input',()=>{state[k]=el.value;persist()})})
+function selectable(id,key){
+ const root=document.getElementById(id); [...root.children].forEach((b,i)=>{b.addEventListener('click',()=>{[...root.children].forEach(x=>x.classList.remove('selected'));b.classList.add('selected');state[key]=i;persist()});if(state[key]===i)b.classList.add('selected')})
+}
+selectable('changeChoices','changeChoice'); selectable('prediction','prediction'); selectable('stance','stance');
+document.querySelectorAll('.quiz').forEach((q,qi)=>{
+ const ans=+q.dataset.answer, fb=q.parentElement.querySelector('.feedback');
+ [...q.children].forEach((b,i)=>b.addEventListener('click',()=>{
+   [...q.children].forEach(x=>x.classList.remove('correct','wrong'));
+   b.classList.add(i===ans?'correct':'wrong'); fb.textContent=i===ans?'✓ Strong reading.':'Try again — look for the poem’s overall stance.';
+ }))
+});
+document.querySelectorAll('#tf .tfrow').forEach(row=>{
+ [...row.querySelectorAll('button')].forEach(b=>b.addEventListener('click',()=>{
+   row.querySelectorAll('button').forEach(x=>x.classList.remove('correct','wrong'));
+   const good=b.textContent.trim()===row.dataset.correct;b.classList.add(good?'correct':'wrong');
+ }))
+});
+document.querySelectorAll('#verbs .chip').forEach(b=>b.addEventListener('click',()=>{
+ b.classList.toggle('selected');
+ const picked=[...document.querySelectorAll('#verbs .chip.selected')];
+ if(picked.length){document.getElementById('verbsfb').textContent=picked.every(x=>x.dataset.good==='1')?'Now check: are all the commands/advice selected?':''}
+}));
+document.querySelectorAll('.vocab').forEach(b=>b.addEventListener('click',()=>document.getElementById('vocabDef').textContent=b.dataset.def));
+document.querySelectorAll('#sortchips .chip').forEach(b=>{
+ b.addEventListener('click',()=>{
+   if(!b.dataset.place)b.dataset.place='opp';
+   else if(b.dataset.place==='opp')b.dataset.place='risk';
+   else b.dataset.place='';
+   if(b.dataset.place==='opp')document.getElementById('opp').appendChild(b);
+   else if(b.dataset.place==='risk')document.getElementById('risk').appendChild(b);
+   else document.getElementById('sortchips').appendChild(b);
+ })
+});
+function openModal(id){document.getElementById(id).classList.add('open')}
+function closeModal(id){document.getElementById(id).classList.remove('open')}
+function openPoem(){const t=localStorage.getItem('embrace_full_poem')||'';document.getElementById('poemInput').value=t;document.getElementById('poemView').textContent=t||'No poem has been stored on this device yet.';openModal('poemModal')}
+function savePoem(){const t=document.getElementById('poemInput').value.trim();localStorage.setItem('embrace_full_poem',t);document.getElementById('poemView').textContent=t||'No poem has been stored on this device yet.'}
+function clearPoem(){localStorage.removeItem('embrace_full_poem');document.getElementById('poemInput').value='';document.getElementById('poemView').textContent='No poem has been stored on this device yet.'}
+function openSlides(){openModal('slidesModal')}
+function openTextbook(){window.open('https://ebooks.edu.gr/ebooks/v/pdf/8547/5393/24-0622-01_Genika-Agglika-B-EPAL_Vivlio-Mathiti/','_blank','noopener')}
+async function toggleFull(){try{if(!document.fullscreenElement)await document.documentElement.requestFullscreen();else await document.exitFullscreen()}catch(e){}}
+function resetActivity(){if(confirm('Clear answers and start again?')){localStorage.removeItem(KEY);state={};document.querySelectorAll('[data-save]').forEach(x=>x.value='');document.querySelectorAll('.selected,.correct,.wrong').forEach(x=>x.classList.remove('selected','correct','wrong'));idx=0;render()}}
+function showSummary(){
+ const c=state.changeChoice!=null?['Work & skills','Friendships','Learning & AI','Entertainment'][state.changeChoice]:'—';
+ const s=state.stance!=null?state.stance+1:'—';
+ document.getElementById('summary').style.display='block';
+ document.getElementById('summary').innerHTML='<strong>Class snapshot</strong><br>Opening focus: '+c+'<br>Final stance (1–5): '+s+'<br><br><strong>Exit ticket:</strong><br>'+((state.s13exit||'—').replace(/[<>&]/g,m=>({'<':'&lt;','>':'&gt;','&':'&amp;'}[m])));
+}
+render();
+</script>
+</body>
+</html>
